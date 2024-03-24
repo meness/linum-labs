@@ -1,11 +1,10 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { parseAbiItem, type Abi, type ContractEventName, type WatchContractEventOnLogsParameter } from 'viem';
+import { parseAbiItem, type Abi, type ContractEventName } from 'viem';
 import { useWatchContractEvent, type UseWatchContractEventParameters } from 'wagmi';
 import { musharka721ContractABI } from '~common/abis';
 import { publicClient } from '~configs';
 import type { Metadata } from '~entities';
-import { replaceIPFS } from '~helpers';
+import { transformMintedLogsToMetadata } from '~helpers';
 
 type UseListingProps<
   ABI extends Abi | readonly unknown[] = Abi,
@@ -16,20 +15,6 @@ type UseListingProps<
 export const useListing = ({ onLogs, ...props }: UseListingProps<typeof musharka721ContractABI, 'Minted', true>) => {
   const [listing, setListing] = useState<Metadata[]>([]);
 
-  const make = (logs: WatchContractEventOnLogsParameter<typeof musharka721ContractABI, 'Minted', true>) => {
-    return Promise.all(
-      logs.map<Promise<Metadata>>(async ({ args: { tokenId, tokenURI } }) => {
-        const metadataURL = replaceIPFS(tokenURI);
-
-        const {
-          data: { description, image, name }
-        } = await axios.get<Omit<Metadata, 'tokenID'>>(metadataURL);
-
-        return { tokenID: tokenId, description, image, name };
-      })
-    );
-  };
-
   useWatchContractEvent({
     abi: musharka721ContractABI,
     address: process.env.NEXT_PUBLIC_NFT_ADDRESS,
@@ -39,7 +24,7 @@ export const useListing = ({ onLogs, ...props }: UseListingProps<typeof musharka
     //   to: ''
     // },
     onLogs: async (logs) => {
-      const metadata = await make(logs);
+      const metadata = await transformMintedLogsToMetadata(logs);
 
       setListing((value) => {
         return [...value, ...metadata];
@@ -64,7 +49,7 @@ export const useListing = ({ onLogs, ...props }: UseListingProps<typeof musharka
         // }
       })
       .then(async (logs) => {
-        const metadata = await make(logs);
+        const metadata = await transformMintedLogsToMetadata(logs);
 
         setListing(metadata);
       });
