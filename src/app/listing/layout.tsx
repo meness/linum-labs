@@ -5,9 +5,9 @@ import { Authentication } from '~components';
 import { FullHeightLayout } from '~layouts';
 import { RainbowKitProvider, ReactQueryProvider, WagmiProvider } from '~providers';
 
-type ListingLayoutProps = PropsWithChildren<Record<'unauthenticated' | 'mint', ReactNode>>;
+type ListingLayoutProps = PropsWithChildren<Record<'unauthenticated' | 'mint' | 'nft', ReactNode>>;
 
-const ListingLayout = ({ children, mint, unauthenticated }: ListingLayoutProps) => {
+const ListingLayout = ({ children, mint, nft, unauthenticated }: ListingLayoutProps) => {
   const cookies = headers().get('cookie');
 
   return (
@@ -18,6 +18,7 @@ const ListingLayout = ({ children, mint, unauthenticated }: ListingLayoutProps) 
             <Authentication authenticated>
               {children}
               {mint}
+              {nft}
             </Authentication>
             <Authentication authenticated={false}>{unauthenticated}</Authentication>
           </FullHeightLayout>
