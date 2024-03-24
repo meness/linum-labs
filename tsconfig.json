@@ -1,0 +1,66 @@
+{
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "typeRoots": [
+      "types",
+      "./node_modules/@types"
+    ],
+    "baseUrl": "./",
+    "paths": {
+      "~*": [
+        "./src/*"
+      ]
+    },
+    "target": "ES2020",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "forceConsistentCasingInFileNames": true,
+    // strictNullChecks must be enabled for type inference to work for Yup
+    "strictNullChecks": true,
+    "noEmit": true,
+    "noImplicitReturns": true,
+    "esModuleInterop": true,
+    "noImplicitAny": false,
+    "experimentalDecorators": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "noUncheckedIndexedAccess": false,
+    "allowUmdGlobalAccess": true,
+    "strictBindCallApply": true,
+    "useDefineForClassFields": true,
+    "noPropertyAccessFromIndexSignature": false,
+    "verbatimModuleSyntax": true,
+    "downlevelIteration": true,
+    "importHelpers": true
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "public"
+  ],
+  "include": [
+    "*.ts",
+    "src/**/*.ts",
+    "types/**/*.ts",
+    "src/**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/app/listing/layout.tsx",
+    "not-found.tsx",
+    "layout.tsx"
+  ]
+}

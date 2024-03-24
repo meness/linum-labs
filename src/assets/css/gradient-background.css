@@ -1,0 +1,76 @@
+@tailwind utilities;
+@tailwind components;
+
+@keyframes move-vertical {
+  0% {
+    transform: translateX(-50%) translateY(-10%);
+  }
+
+  50% {
+    transform: translateX(50%) translateY(10%);
+  }
+
+  100% {
+    transform: translateX(-50%) translateY(-10%);
+  }
+}
+
+@keyframes move-vertical {
+  0% {
+    transform: translateX(-50%) translateY(-10%);
+  }
+
+  50% {
+    transform: translateX(50%) translateY(10%);
+  }
+
+  100% {
+    transform: translateX(-50%) translateY(-10%);
+  }
+}
+
+@keyframes move-in-circle {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes move-vertical {
+  0% {
+    transform: translateY(-50%);
+  }
+
+  50% {
+    transform: translateY(50%);
+  }
+
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@layer utilities {
+  .animate-second {
+    @apply animate-[move-in-circle_20s_reverse_infinite];
+  }
+
+  .animate-third {
+    @apply animate-[move-in-circle_40s_linear_infinite];
+  }
+
+  .animate-forth {
+    @apply animate-[move-horizontal_40s_ease_infinite];
+  }
+
+  .animate-fifth {
+    @apply animate-[move-in-circle_20s_ease_infinite];
+  }
+}

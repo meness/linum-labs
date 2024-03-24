@@ -1,0 +1,15 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "assigneesFromCodeOwners": true,
+  "baseBranches": ["main"],
+  "branchPrefix": "chore/",
+  "extends": ["config:recommended"],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": "every weekend"
+  },
+  "prHourlyLimit": 6,
+  "rangeStrategy": "bump",
+  "reviewersFromCodeOwners": true,
+  "semanticCommits": "enabled"
+}

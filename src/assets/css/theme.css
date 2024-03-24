@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-5xl font-bold;
+  }
+}
+
+@layer utilities {
+  /* empty */
+}
+
+@layer components {
+  /* empty */
+}
