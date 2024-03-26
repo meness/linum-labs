@@ -17,12 +17,12 @@ export const ListingCard = () => {
   });
 
   return (
-    <div className="grid grid-flow-row md:grid-cols-3">
+    <div className="grid grid-flow-row gap-4 md:grid-cols-3">
       {listing.map(({ description, image, name, tokenID }) => {
         return (
           <Card
             key={tokenID}
-            className="col-span-12 h-[300px] sm:col-span-4">
+            className="h-[300px]">
             <CardHeader className="absolute top-1 z-10 flex-col !items-start">
               <p className="text-tiny font-bold uppercase text-white/60">{name}</p>
             </CardHeader>
