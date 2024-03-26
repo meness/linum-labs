@@ -19,7 +19,7 @@ export const UploadInput = ({ className, ...props }: UploadInputProps) => {
       maxParallelUploads={1}
       allowProcess={false}
       credits={false}
-      className={twMerge('m-0 font-sans text-sm', className)}
+      className={twMerge('!m-0 !font-sans !text-sm', className)}
       {...props}
     />
   );
