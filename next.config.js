@@ -88,7 +88,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'mypinata.cloud'
+        hostname: 'ipfs.io'
       }
     ].concat(process.env.NODE_ENV === 'development' ? [{ protocol: 'http', hostname: 'localhost' }] : [])
   }
