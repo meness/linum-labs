@@ -5,9 +5,7 @@
 
 ## ToDo
 
-- Fetch owned NFTs
-- Open a popup to overview each NFT
-- Test minting
+- Use React Hook Form
 
 ## Tech Stack
 
@@ -15,7 +13,7 @@
 - Next.js (App Router)
 - TypeScript
 - NextUI & Tailwind
-- Wagmi
+- Wagmi & Viem
 - RainbowKit
 - React Query
 - ESLint
