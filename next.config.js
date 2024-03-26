@@ -83,6 +83,14 @@ const nextConfig = {
     }
 
     return [];
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'mypinata.cloud'
+      }
+    ].concat(process.env.NODE_ENV === 'development' ? [{ protocol: 'http', hostname: 'localhost' }] : [])
   }
 };
 
