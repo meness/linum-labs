@@ -33,7 +33,6 @@ Dockerfile        text eol=lf
 # Configs
 .env              text eol=lf
 .gitattributes    text eol=lf
-*.lock            text -diff eol=lf
 package-lock.json text -diff eol=lf
 *.toml            text eol=lf
 *.yml             text eol=lf
