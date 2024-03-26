@@ -1,3 +1,5 @@
-export const replaceIPFS = (text: string) => {
-  return text.replace('ipfs://', 'https://ipfs.io/ipfs/');
+import { appConst } from '~common/consts';
+
+export const replaceIPFSProtocol = (text: string) => {
+  return text.replace(appConst.ipfsProtocol, 'https://ipfs.io/ipfs/');
 };

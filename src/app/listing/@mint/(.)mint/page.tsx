@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState, type ChangeEvent } from 'react';
 import toast from 'react-hot-toast';
 import { ConfirmMintModal, UploadInput } from '~components';
-import { useMint, useUpload } from '~hooks';
+import { useMint } from '~hooks';
 
 type FormState = { name: string; description: string; files: FilePondFile[] };
 
@@ -17,13 +17,8 @@ const NFTModal = () => {
   const { back } = useRouter();
   const [{ files, name, description }, setFormState] = useState<FormState>({ name: '', description: '', files: [] });
   const [isConfirmed, setIsConfirmed] = useState(false);
-  const [isMinting, setIsMinting] = useState(false);
-  const { mint } = useMint();
-  const { mutateAsync } = useUpload({
-    onError: (error) => {
-      toast.error(error.message);
-    }
-  });
+  const { isMinting, isMinted, isSuccessConfirmTransaction, mint, isConfirmingTransaction } = useMint();
+
   const {
     isOpen: isConfirmMintModalOpen,
     onOpen: onConfirmMintModalOpen,
@@ -32,7 +27,7 @@ const NFTModal = () => {
   const isFormDisabled = !files || !name || !description || isMinting;
 
   const handleClose = () => {
-    if (!isMinting) {
+    if (!isMinting || !isConfirmingTransaction) {
       back();
     }
   };
@@ -41,6 +36,13 @@ const NFTModal = () => {
     // User has to confirm once again if the required fields have changed
     setIsConfirmed(false);
   }, [name, description, files]);
+
+  useEffect(() => {
+    if (isMinted && isSuccessConfirmTransaction) {
+      handleClose();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMinted, isSuccessConfirmTransaction]);
 
   const handleFormStateChange = <T extends keyof FormState>(field: T, changedValue: FormState[T]) => {
     setFormState((value) => {
@@ -67,14 +69,9 @@ const NFTModal = () => {
   const handleMintClick = async () => {
     if (isConfirmed) {
       try {
-        setIsMinting(true);
-
-        const imageURL = await mutateAsync({ file: files[0].file });
-        const hash = await mint(imageURL, name, description);
+        await mint(files, name, description);
       } catch (error) {
         toast.error('Something went wrong');
-      } finally {
-        setIsMinting(false);
       }
     } else {
       onConfirmMintModalOpen();
@@ -97,6 +94,7 @@ const NFTModal = () => {
             onerror={(addedFileError) => {
               toast.error(addedFileError.body);
             }}
+            disabled={isMinting || isConfirmingTransaction}
           />
           <Input
             placeholder="Write a name"
@@ -104,6 +102,7 @@ const NFTModal = () => {
             autoFocus
             isRequired
             value={name}
+            isDisabled={isMinting || isConfirmingTransaction}
             onChange={onNameChange}
           />
           <Textarea
@@ -111,23 +110,24 @@ const NFTModal = () => {
             label="Description"
             value={description}
             isRequired
+            isDisabled={isMinting || isConfirmingTransaction}
             onChange={onDescriptionChange}
           />
         </ModalBody>
         <ModalFooter>
           <Button
             type="button"
-            isDisabled={isFormDisabled}
-            isLoading={isMinting}
+            isDisabled={isFormDisabled || isConfirmingTransaction}
+            isLoading={isMinting || isConfirmingTransaction}
             onClick={handleMintClick}
             color="primary">
-            {isMinting ? 'Minting' : 'Mint'}
+            {isMinting || isConfirmingTransaction ? 'Minting' : 'Mint'}
           </Button>
           <Button
             type="button"
             color="default"
             variant="ghost"
-            isDisabled={isMinting}
+            isDisabled={isFormDisabled || isConfirmingTransaction}
             onClick={handleClose}>
             Cancel
           </Button>

@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { parseAbiItem, type Abi, type ContractEventName } from 'viem';
 import { getLogs } from 'viem/actions';
-import { useClient, useWatchContractEvent, type UseWatchContractEventParameters } from 'wagmi';
+import { useAccount, useClient, useWatchContractEvent, type UseWatchContractEventParameters } from 'wagmi';
 import { musharka721ContractABI } from '~common/abis';
 import { wagmiConfig } from '~configs';
 import type { Metadata } from '~entities';
 import { transformMintedLogsToMetadata } from '~helpers';
+
+const startBlockNumber = 5566136n;
 
 type UseListingProps<
   ABI extends Abi | readonly unknown[] = Abi,
@@ -14,6 +16,7 @@ type UseListingProps<
 > = Pick<UseWatchContractEventParameters<ABI, EventName, Strict>, 'onError' | 'onLogs'>;
 
 export const useListing = ({ onLogs, ...props }: UseListingProps<typeof musharka721ContractABI, 'Minted', true>) => {
+  const { address } = useAccount();
   const [listing, setListing] = useState<Metadata[]>([]);
   const client = useClient({ config: wagmiConfig });
 
@@ -22,11 +25,16 @@ export const useListing = ({ onLogs, ...props }: UseListingProps<typeof musharka
     address: process.env.NEXT_PUBLIC_NFT_ADDRESS,
     eventName: 'Minted',
     strict: true,
-    // args: {
-    //   to: ''
-    // },
+    args: {
+      // `to` argument isn't indexed, so filtering by an address doesn't work
+      to: address
+    },
     onLogs: async (logs) => {
-      const metadata = await transformMintedLogsToMetadata(logs);
+      const metadata = await transformMintedLogsToMetadata(
+        logs.filter((log) => {
+          return log.args.to === address;
+        })
+      );
 
       setListing((value) => {
         return [...value, ...metadata];
@@ -42,19 +50,23 @@ export const useListing = ({ onLogs, ...props }: UseListingProps<typeof musharka
     getLogs(client, {
       address: process.env.NEXT_PUBLIC_NFT_ADDRESS,
       event: parseAbiItem('event Minted(address to, string tokenURI, uint256 tokenId)'),
-      fromBlock: 'earliest',
+      fromBlock: startBlockNumber,
       toBlock: 'latest',
-      strict: true
-      // args: {
-      //   to: ''
-      // }
+      strict: true,
+      args: {
+        // `to` argument isn't indexed, so filtering by an address doesn't work
+        to: address
+      }
     }).then(async (logs) => {
-      const metadata = await transformMintedLogsToMetadata(logs);
+      const metadata = await transformMintedLogsToMetadata(
+        logs.filter((log) => {
+          return log.args.to === address;
+        })
+      );
 
       setListing(metadata);
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [address, client]);
 
   return listing;
 };
