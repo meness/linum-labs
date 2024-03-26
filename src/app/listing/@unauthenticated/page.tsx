@@ -1,6 +1,6 @@
 import { WalletButton } from '~components';
 
-export const UnauthenticatedDefault = () => {
+const UnauthenticatedDefault = () => {
   return (
     <div className="mx-auto flex h-full max-w-2xl flex-col place-content-center place-items-center gap-4 text-center">
       <h1>Your&apos;re not connected</h1>
