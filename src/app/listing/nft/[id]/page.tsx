@@ -1,14 +1,14 @@
 import type { Metadata } from 'next';
 import { Section, SectionHeader } from '~components';
-import { NFTFormCard } from './_components';
+import { NFTCard } from './_components';
 
 const NFTPage = () => {
   return (
     <Section className="h-full max-w-2xl place-content-center">
       <SectionHeader>
-        <h1>✍️ NFT</h1>
+        <h1>🎇 Overview</h1>
       </SectionHeader>
-      <NFTFormCard />
+      <NFTCard />
     </Section>
   );
 };

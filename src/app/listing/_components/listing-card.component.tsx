@@ -2,7 +2,9 @@
 
 import { Card, CardFooter, CardHeader } from '@nextui-org/card';
 import { Image } from '@nextui-org/image';
+import { Link } from '@nextui-org/link';
 import toast from 'react-hot-toast';
+import { routeConst } from '~common/consts';
 import { replaceIPFSProtocol } from '~helpers';
 import { useListing } from '~hooks';
 
@@ -21,8 +23,11 @@ export const ListingCard = () => {
       {listing.map(({ description, image, name, tokenID }) => {
         return (
           <Card
-            key={tokenID}
-            className="h-[300px]">
+            className="h-[300px]"
+            as={Link}
+            href={`${routeConst.nft}/${tokenID}`}
+            aria-label={name}
+            key={tokenID}>
             <CardHeader className="absolute top-1 z-10 flex-col !items-start">
               <p className="text-tiny font-bold uppercase text-white/60">{name}</p>
             </CardHeader>

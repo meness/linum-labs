@@ -8,7 +8,7 @@ export default {
     './src/components/**/*.tsx',
     './src/layouts/**/*.tsx',
     './src/assets/css/**/*.css',
-    './node_modules/@nextui-org/theme/dist/components/(avatar|button|card|input|link|modal|navbar|switch|image).js'
+    './node_modules/@nextui-org/theme/dist/components/(avatar|button|card|input|link|modal|navbar|switch|image|skeleton).js'
   ],
   darkMode: 'class',
   plugins: [nextui()],

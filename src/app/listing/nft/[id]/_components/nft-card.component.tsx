@@ -1,33 +1,30 @@
 'use client';
 
 import { Button } from '@nextui-org/button';
-import { Card, CardFooter, CardHeader } from '@nextui-org/card';
+import { Card, CardBody, CardFooter, CardHeader } from '@nextui-org/card';
 import { Image } from '@nextui-org/image';
-import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/modal';
 import { Skeleton } from '@nextui-org/skeleton';
 import 'filepond/dist/filepond.min.css';
 import { useParams, useRouter } from 'next/navigation';
+import { routeConst } from '~common/consts';
 import { replaceIPFSProtocol } from '~helpers';
 import { useNFT } from '~hooks';
 
-const NFTModal = () => {
+export const NFTCard = () => {
+  const { push } = useRouter();
   const { id: nftID } = useParams<{ id: string }>();
-  const { back } = useRouter();
   const { data: nft, isPending: isPendingNFT } = useNFT(BigInt(nftID));
 
-  const handleClose = () => {
-    back();
+  const handleCancelClick = () => {
+    push(routeConst.listing);
   };
 
   return (
-    <Modal
-      defaultOpen
-      size="lg"
-      backdrop="blur"
-      onClose={handleClose}>
-      <ModalContent as="form">
-        <ModalHeader>🎇 Overview</ModalHeader>
-        <ModalBody className="flex flex-col gap-2">
+    <Card
+      as="form"
+      fullWidth>
+      <CardBody className="flex flex-col gap-2">
+        <Card className="col-span-12 h-[300px] sm:col-span-4">
           <Card className="col-span-12 h-[300px] sm:col-span-4">
             <CardHeader className="absolute top-1 z-10 flex-col !items-start">
               <Skeleton
@@ -51,20 +48,18 @@ const NFTModal = () => {
               <Skeleton isLoaded={!isPendingNFT}>{nft?.description}</Skeleton>
             </CardFooter>
           </Card>
-        </ModalBody>
-        <ModalFooter>
-          <Button
-            type="button"
-            color="default"
-            fullWidth
-            variant="ghost"
-            onClick={handleClose}>
-            Cool
-          </Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+        </Card>
+      </CardBody>
+      <CardFooter>
+        <Button
+          type="button"
+          color="default"
+          fullWidth
+          variant="ghost"
+          onClick={handleCancelClick}>
+          Cool
+        </Button>
+      </CardFooter>
+    </Card>
   );
 };
-
-export default NFTModal;
