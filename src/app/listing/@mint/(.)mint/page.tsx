@@ -24,7 +24,7 @@ const NFTModal = () => {
     onOpen: onConfirmMintModalOpen,
     onOpenChange: onConfirmMintModalOpenChange
   } = useDisclosure();
-  const isFormDisabled = !files || !name || !description || isMinting;
+  const isFormInValid = !files || !name || !description || isMinting;
 
   const handleClose = () => {
     if (!isMinting || !isConfirmingTransaction) {
@@ -117,7 +117,7 @@ const NFTModal = () => {
         <ModalFooter>
           <Button
             type="button"
-            isDisabled={isFormDisabled || isConfirmingTransaction}
+            isDisabled={isFormInValid || isMinting || isConfirmingTransaction}
             isLoading={isMinting || isConfirmingTransaction}
             onClick={handleMintClick}
             color="primary">
@@ -127,7 +127,7 @@ const NFTModal = () => {
             type="button"
             color="default"
             variant="ghost"
-            isDisabled={isFormDisabled || isConfirmingTransaction}
+            isDisabled={isMinting || isConfirmingTransaction}
             onClick={handleClose}>
             Cancel
           </Button>

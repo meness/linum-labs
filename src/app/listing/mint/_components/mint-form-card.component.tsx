@@ -25,7 +25,7 @@ export const MintFormCard = () => {
     onOpen: onConfirmMintModalOpen,
     onOpenChange: onConfirmMintModalOpenChange
   } = useDisclosure();
-  const isFormDisabled = !files || !name || !description || isMinting;
+  const isFormInvalid = !files || !name || !description || isMinting;
 
   const handleClose = () => {
     if (!isMinting || !isConfirmingTransaction) {
@@ -115,7 +115,7 @@ export const MintFormCard = () => {
         <CardFooter className="gap-2">
           <Button
             type="button"
-            isDisabled={isFormDisabled || isConfirmingTransaction}
+            isDisabled={isFormInvalid || isMinting || isConfirmingTransaction}
             isLoading={isMinting || isConfirmingTransaction}
             onClick={handleMintClick}
             color="primary">
@@ -125,7 +125,7 @@ export const MintFormCard = () => {
             type="button"
             color="default"
             variant="ghost"
-            isDisabled={isFormDisabled || isConfirmingTransaction}
+            isDisabled={isMinting || isConfirmingTransaction}
             onClick={handleClose}>
             Cancel
           </Button>
