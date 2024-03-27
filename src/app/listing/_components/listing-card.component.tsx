@@ -14,8 +14,8 @@ export const ListingCard = () => {
     onLogs: () => {
       toast.success('A new NFT has been added to your listing');
     },
-    onError: (error) => {
-      toast.error(error.message);
+    onError: () => {
+      toast.error('Something went wrong');
     }
   });
 
