@@ -35,7 +35,7 @@ export const useMint = () => {
     }
   });
   const isMinting = isPendingPinFile || isPendingPinJSON || isPendingMint;
-  const isMinted = isSuccessPinFile || isSuccessPinJSON || isSuccessMint;
+  const isMinted = isSuccessPinFile && isSuccessPinJSON && isSuccessMint;
 
   const mint = async (files: FilePondFile[], name: string, description: string) => {
     ok(address, 'Invalid account address');
