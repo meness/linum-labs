@@ -14,6 +14,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'ipfs.io'
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.pravatar.cc'
       }
     ].concat(process.env.NODE_ENV === 'development' ? [{ protocol: 'http', hostname: 'localhost' }] : [])
   }
