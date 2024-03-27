@@ -23,7 +23,7 @@ export const ListingCard = () => {
       {listing.map(({ description, image, name, tokenID }) => {
         return (
           <Card
-            className="h-[300px]"
+            className="h-[300px] hover:scale-[1.02] hover:opacity-100 active:scale-100 active:opacity-100"
             as={Link}
             href={`${routeConst.nft}/${tokenID}`}
             aria-label={name}
