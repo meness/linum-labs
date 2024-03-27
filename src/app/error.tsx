@@ -7,6 +7,7 @@ type GlobalErrorProps = { error: Error & { digest?: string }; reset: () => void 
 
 export const Error = ({ error, reset }: GlobalErrorProps) => {
   useEffect(() => {
+    // eslint-disable-next-line no-console
     console.error(error);
   }, [error]);
 
