@@ -40,7 +40,7 @@ export const useMint = () => {
   const mint = async (files: FilePondFile[], name: string, description: string) => {
     ok(address, 'Invalid account address');
 
-    const imageURL = await pinFileAsync({ file: files[0].file });
+    const imageURL = await pinFileAsync(files[0].file);
     const tokenURI = await pinJSONAsync({ image: imageURL, name, description });
     const hash = await mintAsync({
       abi: musharka721ContractABI,
