@@ -57,7 +57,7 @@ export const NFTCard = () => {
           fullWidth
           variant="ghost"
           onClick={handleCancelClick}>
-          Cool
+          Looks good
         </Button>
       </CardFooter>
     </Card>

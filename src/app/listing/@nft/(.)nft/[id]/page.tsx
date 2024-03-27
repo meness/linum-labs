@@ -59,7 +59,7 @@ const NFTModal = () => {
             fullWidth
             variant="ghost"
             onClick={handleClose}>
-            Cool
+            Looks good
           </Button>
         </ModalFooter>
       </ModalContent>
