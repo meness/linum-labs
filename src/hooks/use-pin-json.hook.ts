@@ -5,7 +5,7 @@ import type { AwaitedReturnType } from '~common/types';
 const api = UploadAPI.pinJSON;
 type ApiReturnType = AwaitedReturnType<typeof api>;
 
-export const useUploadJSON = (options?: Omit<UseMutationOptions<ApiReturnType, Error, Object>, 'mutationFn'>) => {
+export const usePinJSON = (options?: Omit<UseMutationOptions<ApiReturnType, Error, Object>, 'mutationFn'>) => {
   return useMutation({
     ...options,
     mutationFn: api

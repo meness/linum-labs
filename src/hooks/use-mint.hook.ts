@@ -5,8 +5,8 @@ import toast from 'react-hot-toast';
 import type { Address } from 'viem';
 import { useAccount, useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
 import { musharka721ContractABI } from '~common/abis';
-import { useUploadFile } from './use-upload-file.hook';
-import { useUploadJSON } from './use-upload-json.hook';
+import { usePinFile } from './use-pin-file.hook';
+import { usePinJSON } from './use-pin-json.hook';
 
 export const useMint = () => {
   const [mintHash, setMintHash] = useState<Address | undefined>();
@@ -17,31 +17,31 @@ export const useMint = () => {
     query: { enabled: !!mintHash }
   });
   const {
-    isSuccess: isSuccessUploadFile,
-    isPending: isPendingUploadFile,
-    mutateAsync: uploadFileAsync
-  } = useUploadFile({
+    isSuccess: isSuccessPinFile,
+    isPending: isPendingPinFile,
+    mutateAsync: pinFileAsync
+  } = usePinFile({
     onError: (error) => {
       toast.error(error.message);
     }
   });
   const {
-    isSuccess: isSuccessUploadJSON,
-    isPending: isPendingUploadJSON,
-    mutateAsync: uploadJSONAsync
-  } = useUploadJSON({
+    isSuccess: isSuccessPinJSON,
+    isPending: isPendingPinJSON,
+    mutateAsync: pinJSONAsync
+  } = usePinJSON({
     onError: (error) => {
       toast.error(error.message);
     }
   });
-  const isMinting = isPendingUploadFile || isPendingUploadJSON || isPendingMint;
-  const isMinted = isSuccessUploadFile || isSuccessUploadJSON || isSuccessMint;
+  const isMinting = isPendingPinFile || isPendingPinJSON || isPendingMint;
+  const isMinted = isSuccessPinFile || isSuccessPinJSON || isSuccessMint;
 
   const mint = async (files: FilePondFile[], name: string, description: string) => {
     ok(address, 'Invalid account address');
 
-    const imageURL = await uploadFileAsync({ file: files[0].file });
-    const tokenURI = await uploadJSONAsync({ image: imageURL, name, description });
+    const imageURL = await pinFileAsync({ file: files[0].file });
+    const tokenURI = await pinJSONAsync({ image: imageURL, name, description });
     const hash = await mintAsync({
       abi: musharka721ContractABI,
       address: process.env.NEXT_PUBLIC_NFT_ADDRESS,

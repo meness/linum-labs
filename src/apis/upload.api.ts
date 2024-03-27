@@ -1,9 +1,8 @@
 import { axiosConfig } from '~configs';
 import type { FilesUploadResponse } from '~entities';
-import type { FilesUploadDTO } from './dtos';
 
 export const UploadAPI = {
-  pinFile: async ({ file }: FilesUploadDTO) => {
+  pinFile: async (file: Blob) => {
     const formData = new FormData();
 
     formData.append('file', file);
