@@ -50,6 +50,7 @@ export const NFTCard = () => {
           color="default"
           fullWidth
           variant="ghost"
+          isDisabled={isPendingNFT}
           onClick={handleCancelClick}>
           Looks good
         </Button>

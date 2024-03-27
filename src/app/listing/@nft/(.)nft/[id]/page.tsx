@@ -54,6 +54,7 @@ const NFTModal = () => {
             color="default"
             fullWidth
             variant="ghost"
+            isDisabled={isPendingNFT}
             onClick={handleClose}>
             Looks good
           </Button>
