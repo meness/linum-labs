@@ -9,7 +9,7 @@ import { routeConst } from '~common/consts';
 import { replaceIPFSProtocol } from '~helpers';
 import { useListing } from '~hooks';
 
-export const ListingCard = () => {
+export const ListingCards = () => {
   const { listing, isLoadingListing } = useListing({
     onLogs: () => {
       toast.success('A new NFT has been added to your listing');

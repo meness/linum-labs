@@ -3,7 +3,7 @@ import { Link } from '@nextui-org/link';
 import type { Metadata } from 'next';
 import { routeConst } from '~common/consts';
 import { Section, SectionHeader } from '~components';
-import { ListingCard } from './_components';
+import { ListingCards } from './_components';
 
 const ListingPage = () => {
   return (
@@ -18,7 +18,7 @@ const ListingPage = () => {
           Mint NFT
         </Button>
       </SectionHeader>
-      <ListingCard />
+      <ListingCards />
     </Section>
   );
 };
