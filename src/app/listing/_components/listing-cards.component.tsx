@@ -40,8 +40,8 @@ export const ListingCards = () => {
               href={`${routeConst.nft}/${tokenID}`}
               aria-label={name}
               key={tokenID}>
-              <CardHeader className="absolute top-1 z-10 flex-col !items-start">
-                <p className="text-tiny font-bold uppercase text-white/60">{name}</p>
+              <CardHeader className="absolute top-1 z-10 flex-col !items-start text-tiny font-bold uppercase text-white/60">
+                {name}
               </CardHeader>
               <Image
                 removeWrapper

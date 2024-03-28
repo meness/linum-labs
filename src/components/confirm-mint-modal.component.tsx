@@ -29,8 +29,8 @@ export const ConfirmMintModal = ({ name, files, description, onConfirmClick, ...
               <ModalHeader className="flex flex-col gap-1">Confirm NFT</ModalHeader>
               <ModalBody className="flex flex-col gap-1">
                 <Card className="col-span-12 h-[300px] sm:col-span-4">
-                  <CardHeader className="absolute top-1 z-10 flex-col !items-start">
-                    <p className="text-tiny font-bold uppercase text-white/60">{name}</p>
+                  <CardHeader className="absolute top-1 z-10 flex-col !items-start text-tiny font-bold uppercase text-white/60">
+                    {name}
                   </CardHeader>
                   {files.map((file) => {
                     return (
