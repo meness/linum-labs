@@ -9,7 +9,7 @@ type UploadInputProps = FilePondProps;
 export const UploadInput = ({ className, ...props }: UploadInputProps) => {
   return (
     <FilePond
-      labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+      labelIdle='Drag & drop your files or <span class="filepond--label-action">browse</span>'
       acceptedFileTypes={['image/*']}
       allowPaste={false}
       allowRevert={false}
