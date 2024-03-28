@@ -38,7 +38,7 @@ const NFTModal = () => {
   }, [name, description, files]);
 
   useEffect(() => {
-    if (isMinted && isSuccessConfirmTransaction) {
+    if (isMinted || isSuccessConfirmTransaction) {
       handleClose();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
