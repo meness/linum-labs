@@ -13,7 +13,7 @@ import { useNFT } from '~hooks';
 export const NFTCard = () => {
   const { push } = useRouter();
   const { id: nftID } = useParams<{ id: string }>();
-  const { data: nft, isPending: isPendingNFT } = useNFT(BigInt(nftID));
+  const { nft, isPending: isPendingNFT } = useNFT(BigInt(nftID));
 
   const handleCancelClick = () => {
     push(routeConst.listing);

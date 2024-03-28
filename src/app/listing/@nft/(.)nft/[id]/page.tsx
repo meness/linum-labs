@@ -13,7 +13,7 @@ import { useNFT } from '~hooks';
 const NFTModal = () => {
   const { id: nftID } = useParams<{ id: string }>();
   const { back } = useRouter();
-  const { data: nft, isPending: isPendingNFT } = useNFT(BigInt(nftID));
+  const { nft, isPending: isPendingNFT } = useNFT(BigInt(nftID));
 
   const handleClose = () => {
     back();

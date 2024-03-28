@@ -5,7 +5,7 @@ import { useMetadata } from './use-metadata.hook';
 
 export const useNFT = (tokenID: bigint) => {
   const [tokenURI, setTokenURI] = useState('');
-  const { isPending: isPendingMetadata, ...rest } = useMetadata(tokenURI);
+  const { isPending: isPendingMetadata, data: nft, ...rest } = useMetadata(tokenURI);
 
   const { isPending: isPendingTokenURI, data: readTokenURI } = useReadContract({
     abi: musharka721ContractABI,
@@ -21,5 +21,5 @@ export const useNFT = (tokenID: bigint) => {
     }
   }, [readTokenURI]);
 
-  return { isPending: isPendingMetadata || isPendingTokenURI, ...rest };
+  return { isPending: isPendingMetadata || isPendingTokenURI, nft, ...rest };
 };
