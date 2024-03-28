@@ -8,12 +8,13 @@ import 'filepond/dist/filepond.min.css';
 import { useParams, useRouter } from 'next/navigation';
 import { routeConst } from '~common/consts';
 import { replaceIPFSProtocol } from '~helpers';
-import { useNFT } from '~hooks';
+import { useFullscreen, useNFT } from '~hooks';
 
 export const NFTCard = () => {
   const { push } = useRouter();
   const { id: nftID } = useParams<{ id: string }>();
   const { nft, isPending: isPendingNFT } = useNFT(BigInt(nftID));
+  const { fullscreenRef, handleFullscreen } = useFullscreen<HTMLImageElement>();
 
   const handleCancelClick = () => {
     push(routeConst.listing);
@@ -28,20 +29,26 @@ export const NFTCard = () => {
           <Skeleton className="col-span-12 h-[300px] rounded-[var(--nextui-radius-large)] sm:col-span-4" />
         )}
         {!isPendingNFT && nft && (
-          <Card className="col-span-12 h-[300px] sm:col-span-4">
-            <CardHeader className="absolute top-1 z-10 flex-col !items-start">
-              <p className="text-tiny font-bold uppercase text-white/60">{nft.name}</p>
-            </CardHeader>
-            <Image
-              src={replaceIPFSProtocol(nft.image)}
-              removeWrapper
-              alt="NFT"
-              className="z-0 h-full w-full object-cover"
-            />
-            <CardFooter className="absolute bottom-0 z-10 justify-between border-t-1 border-zinc-100/50 bg-white/30">
-              {nft.description}
-            </CardFooter>
-          </Card>
+          <button
+            type="button"
+            aria-label="See this NFT in the fullscreen mode"
+            onClick={handleFullscreen}>
+            <Card className="col-span-12 h-[300px] hover:scale-[1.01] active:scale-100 sm:col-span-4">
+              <CardHeader className="absolute top-1 z-10 flex-col !items-start">
+                <p className="text-tiny font-bold uppercase text-white/60">{nft.name}</p>
+              </CardHeader>
+              <Image
+                src={replaceIPFSProtocol(nft.image)}
+                removeWrapper
+                alt="NFT"
+                className="z-0 h-full w-full object-cover"
+                ref={fullscreenRef}
+              />
+              <CardFooter className="absolute bottom-0 z-10 justify-between border-t-1 border-zinc-100/50 bg-white/30">
+                {nft.description}
+              </CardFooter>
+            </Card>
+          </button>
         )}
       </CardBody>
       <CardFooter>
