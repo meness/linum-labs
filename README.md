@@ -5,6 +5,7 @@
 
 ## ToDo
 
+- Paginate the listing
 - Use React Hook Form
 
 ## Tech Stack
