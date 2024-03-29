@@ -19,7 +19,7 @@ export const useListing = ({ onLogs, ...props }: UseListingProps<typeof musharka
   const { address } = useAccount();
   const [listing, setListing] = useState<Metadata[]>([]);
   const client = useClient({ config: wagmiConfig });
-  const [isLoadingListing, setIsLoadingListing] = useState(false);
+  const [isLoadingListing, setIsLoadingListing] = useState(true);
 
   useWatchContractEvent({
     abi: musharka721ContractABI,
@@ -48,8 +48,6 @@ export const useListing = ({ onLogs, ...props }: UseListingProps<typeof musharka
 
   useEffect(() => {
     // Get all listing once
-    setIsLoadingListing(true);
-
     getLogs(client, {
       address: process.env.NEXT_PUBLIC_NFT_ADDRESS,
       event: parseAbiItem('event Minted(address to, string tokenURI, uint256 tokenId)'),

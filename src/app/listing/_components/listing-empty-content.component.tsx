@@ -5,7 +5,7 @@ import { routeConst } from '~common/consts';
 export const ListingEmptyContent = () => {
   return (
     <div className="flex flex-col items-center gap-4">
-      <p className="text-large font-medium">You haven&apos;t added any NFTs yet.</p>
+      <p className="text-large font-medium">You have minted no NFTs yet.</p>
       <Button
         as={Link}
         href={routeConst.mint}
@@ -13,7 +13,7 @@ export const ListingEmptyContent = () => {
         className="w-fit font-bold"
         size="lg"
         variant="shadow">
-        Mint First NFT
+        Mint your first one
       </Button>
     </div>
   );

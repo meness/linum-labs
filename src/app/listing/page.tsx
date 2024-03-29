@@ -7,7 +7,7 @@ import { ListingCards } from './_components';
 
 const ListingPage = () => {
   return (
-    <Section>
+    <Section className="h-full">
       <SectionHeader>
         <h1 className="grow">🎇 Listing</h1>
         <Button

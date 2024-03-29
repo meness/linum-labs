@@ -4,6 +4,7 @@ import { Skeleton } from '@nextui-org/skeleton';
 import toast from 'react-hot-toast';
 import { useListing } from '~hooks';
 import { ListingCard } from './listing-card.component';
+import { ListingEmptyContent } from './listing-empty-content.component';
 
 export const ListingCards = () => {
   const { listing, isLoadingListing } = useListing({
@@ -15,10 +16,10 @@ export const ListingCards = () => {
     }
   });
 
-  return (
-    <div className="grid grid-flow-row gap-4 md:grid-cols-3">
-      {isLoadingListing &&
-        new Array(6).fill(1).map((_, index) => {
+  if (isLoadingListing) {
+    return (
+      <div className="grid grid-flow-row gap-4 md:grid-cols-3">
+        {new Array(6).fill(1).map((_, index) => {
           return (
             <Skeleton
               // eslint-disable-next-line react/no-array-index-key
@@ -27,15 +28,28 @@ export const ListingCards = () => {
             />
           );
         })}
-      {!isLoadingListing &&
-        listing.map((nft) => {
-          return (
-            <ListingCard
-              key={nft.tokenID}
-              nft={nft}
-            />
-          );
-        })}
+      </div>
+    );
+  }
+
+  if (!isLoadingListing && listing.length === 0) {
+    return (
+      <div className="flex h-full place-content-center place-items-center">
+        <ListingEmptyContent />
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid grid-flow-row gap-4 md:grid-cols-3">
+      {listing.map((nft) => {
+        return (
+          <ListingCard
+            key={nft.tokenID}
+            nft={nft}
+          />
+        );
+      })}
     </div>
   );
 };
