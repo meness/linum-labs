@@ -1,13 +1,9 @@
 'use client';
 
-import { Card, CardFooter, CardHeader } from '@nextui-org/card';
-import { Image } from '@nextui-org/image';
-import { Link } from '@nextui-org/link';
 import { Skeleton } from '@nextui-org/skeleton';
 import toast from 'react-hot-toast';
-import { routeConst } from '~common/consts';
-import { replaceIPFSProtocol } from '~helpers';
 import { useListing } from '~hooks';
+import { ListingCard } from './listing-card.component';
 
 export const ListingCards = () => {
   const { listing, isLoadingListing } = useListing({
@@ -32,27 +28,12 @@ export const ListingCards = () => {
           );
         })}
       {!isLoadingListing &&
-        listing.map(({ description, image, name, tokenID }) => {
+        listing.map((nft) => {
           return (
-            <Card
-              className="h-[300px] hover:scale-[1.02] hover:opacity-100 active:scale-100 active:opacity-100"
-              as={Link}
-              href={`${routeConst.nft}/${tokenID}`}
-              aria-label={name}
-              key={tokenID}>
-              <CardHeader className="absolute top-1 z-10 flex-col !items-start text-tiny font-bold uppercase text-white/60">
-                {name}
-              </CardHeader>
-              <Image
-                removeWrapper
-                alt="Card background"
-                className="z-0 h-full w-full object-cover"
-                src={replaceIPFSProtocol(image)}
-              />
-              <CardFooter className="absolute bottom-0 z-10 justify-between border-t-1 border-zinc-100/50 bg-white/30">
-                {description}
-              </CardFooter>
-            </Card>
+            <ListingCard
+              key={nft.tokenID}
+              nft={nft}
+            />
           );
         })}
     </div>
