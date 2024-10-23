@@ -59,7 +59,7 @@
     "simplex-noise": "^4.0.1",
     "tailwind-merge": "^2.2.2",
     "viem": "^2.9.3",
-    "wagmi": "^2.5.13",
+    "wagmi": "^2.12.25",
     "yup": "^1.4.0"
   },
   "devDependencies": {
