@@ -68,7 +68,7 @@
     "@next/eslint-plugin-next": "^14.1.4",
     "@tanstack/eslint-plugin-query": "^5.28.6",
     "@types/csp-dev": "^1.0.3",
-    "@types/node": "^20.11.30",
+    "@types/node": "^20.17.0",
     "@types/react": "^18.2.73",
     "@types/react-dom": "^18.2.22",
     "@typescript-eslint/eslint-plugin": "^7.4.0",
@@ -109,6 +109,6 @@
     "typescript": "^5.4.3"
   },
   "engines": {
-    "node": ">= 20.0.0"
+    "node": ">= 20.18.0"
   }
 }
